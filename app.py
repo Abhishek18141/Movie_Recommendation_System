@@ -1,4 +1,4 @@
-import streamlit as st
+mport streamlit as st
 import pickle
 from PIL import Image
 import requests
