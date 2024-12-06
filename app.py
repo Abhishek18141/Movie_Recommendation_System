@@ -20,29 +20,16 @@ similarity = pickle.load(open('similarity.pkl', 'rb'))
 st.title('🎬 Movie Recommender System')
 st.markdown("## Find your next favorite movie!")
 
-# Initialize session state variables
-if "selected_movie" not in st.session_state:
-    st.session_state["selected_movie"] = ""
-if "recommended_movies" not in st.session_state:
-    st.session_state["recommended_movies"] = []
-
-# Sidebar setup
+# Set up the sidebar with movie selection
 st.sidebar.header('Choose a movie to get recommendations')
 movie_list = movies['title'].values
 
-# Clear selection logic
-def clear_selection():
-    st.session_state["selected_movie"] = ""
-    st.session_state["recommended_movies"] = []
+# Generate a unique key for the selectbox
+selectbox_key = 'movie_selectbox'
 
-# Movie selection dropdown
-selected_movie = st.sidebar.selectbox(
-    "Kindly type or select a movie from the dropdown",
-    [""] + list(movie_list),  # Add an empty option for clearing
-    key="selected_movie"
-)
+selected_movie = st.sidebar.selectbox("Kindly type or select a movie from the dropdown", movie_list, key=selectbox_key)
 
-# Add an image to the sidebar
+# Add an image to the sidebar for a better visual appeal
 try:
     image = Image.open('image-asset.jpeg')
 except FileNotFoundError:
@@ -53,18 +40,11 @@ except FileNotFoundError:
 st.sidebar.image(image, use_column_width=True)
 
 # Show recommendations on button click
-if st.sidebar.button("Show Recommendation") and selected_movie:
-    st.session_state["recommended_movies"] = recommend(selected_movie)
-
-# Clear output on button click
-if st.sidebar.button("Clear Selection"):
-    clear_selection()
-
-# Display recommendations if available
-if st.session_state["recommended_movies"]:
+if st.sidebar.button('Show Recommendation'):
     st.markdown("### Recommended Movies")
-    for movie in st.session_state["recommended_movies"]:
-        st.write(f"🎥 {movie}")
+    recommended_movie_names = recommend(selected_movie)
+    for i in recommended_movie_names:
+        st.write(f"🎥 {i}")
 
 # Footer
 st.markdown("""
