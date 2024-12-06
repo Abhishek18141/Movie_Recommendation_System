@@ -20,16 +20,29 @@ similarity = pickle.load(open('similarity.pkl', 'rb'))
 st.title('🎬 Movie Recommender System')
 st.markdown("## Find your next favorite movie!")
 
-# Set up the sidebar with movie selection
+# Initialize session state variables
+if "selected_movie" not in st.session_state:
+    st.session_state["selected_movie"] = ""
+if "recommended_movies" not in st.session_state:
+    st.session_state["recommended_movies"] = []
+
+# Sidebar setup
 st.sidebar.header('Choose a movie to get recommendations')
 movie_list = movies['title'].values
 
-# Generate a unique key for the selectbox
-selectbox_key = 'movie_selectbox'
+# Clear selection logic
+def clear_selection():
+    st.session_state["selected_movie"] = ""
+    st.session_state["recommended_movies"] = []
 
-selected_movie = st.sidebar.selectbox("Kindly type or select a movie from the dropdown", movie_list, key=selectbox_key)
+# Movie selection dropdown
+selected_movie = st.sidebar.selectbox(
+    "Kindly type or select a movie from the dropdown",
+    [""] + list(movie_list),  # Add an empty option for clearing
+    key="selected_movie"
+)
 
-# Add an image to the sidebar for a better visual appeal
+# Add an image to the sidebar
 try:
     image = Image.open('image-asset.jpeg')
 except FileNotFoundError:
@@ -40,16 +53,18 @@ except FileNotFoundError:
 st.sidebar.image(image, use_column_width=True)
 
 # Show recommendations on button click
-if st.sidebar.button('Show Recommendation'):
-    st.markdown("### Recommended Movies")
-    recommended_movie_names = recommend(selected_movie)
-    for i in recommended_movie_names:
-        st.write(f"🎥 {i}")
+if st.sidebar.button("Show Recommendation") and selected_movie:
+    st.session_state["recommended_movies"] = recommend(selected_movie)
 
-# Add a button to clear the selection (recreate the selectbox with a unique key)
-if st.sidebar.button('Clear Selection'):
-    # Reset the selectbox by recreating it with a new key
-    st.sidebar.selectbox("Kindly type or select a movie from the dropdown", movie_list, key=selectbox_key + '_reset')
+# Clear output on button click
+if st.sidebar.button("Clear Selection"):
+    clear_selection()
+
+# Display recommendations if available
+if st.session_state["recommended_movies"]:
+    st.markdown("### Recommended Movies")
+    for movie in st.session_state["recommended_movies"]:
+        st.write(f"🎥 {movie}")
 
 # Footer
 st.markdown("""
