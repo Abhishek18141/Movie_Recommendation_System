@@ -46,6 +46,10 @@ if st.sidebar.button('Show Recommendation'):
     for i in recommended_movie_names:
         st.write(f"🎥 {i}")
 
+# Add a button to clear the selection (recreate the selectbox with a unique key)
+if st.sidebar.button('Clear Selection'):
+    st.experimental_rerun()
+
 # Footer
 st.markdown("""
 ---
