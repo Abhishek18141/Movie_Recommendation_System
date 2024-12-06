@@ -1,13 +1,16 @@
 🎬 Movie Recommender System
-This project is a simple Movie Recommender System built with Streamlit, which allows users to select a movie and receive recommendations for similar movies. The system uses precomputed similarity data and movie metadata stored in pickle files.
+    This project is a simple Movie Recommender System built with Streamlit, which allows users to select a movie and receive recommendations for similar movies. The system uses precomputed similarity data and movie metadata stored in pickle files.
 
 🛠️ Features
+
 Interactive and user-friendly interface built using Streamlit.
 Dropdown for selecting a movie to get recommendations.
 Display of top 5 recommended movies based on similarity.
 Clear selection functionality to reset recommendations.
 Sidebar with an optional movie poster for better visual appeal.
+
 🚀 How to Run the Project
+
 Prerequisites
 Python 3.8 or higher installed on your machine.
 Required Python libraries (listed in requirements.txt).
@@ -24,10 +27,8 @@ Copy code
 python -m venv venv
 source venv/bin/activate    # For Linux/MacOS
 venv\Scripts\activate       # For Windows
-Install required Python packages:
 
-bash
-Copy code
+Install required Python packages:
 pip install -r requirements.txt
 Add Necessary Files
 Ensure the following files are present in the project directory:
@@ -35,14 +36,10 @@ Ensure the following files are present in the project directory:
 movie_list.pkl: Contains movie titles and metadata.
 similarity.pkl: Contains precomputed similarity scores.
 If these files are missing, refer to the Dataset and Model section below to regenerate them.
-
-Run the Application
-bash
-Copy code
 streamlit run app.py
+
 📂 Project Structure
-bash
-Copy code
+
 Movie_Recommend_System/
 ├── app.py               # Main Streamlit application
 ├── movie_list.pkl       # Pickle file containing movie metadata
@@ -52,14 +49,14 @@ Movie_Recommend_System/
 └── README.md            # Project documentation
 
 📜 Dataset and Model
+
 Dataset: The system uses a dataset of movie titles and metadata.
 Replace movie_list.pkl with your dataset or regenerate it using pandas.
 Similarity Computation: Precomputed similarity scores (e.g., cosine similarity) are saved in similarity.pkl.
 Ensure these files are properly created and saved before running the app.
 Example to regenerate the pickle files:
 
-python
-Copy code
+
 import pandas as pd
 import pickle
 
@@ -94,8 +91,8 @@ Integrate real-time data from external APIs (e.g., TMDb or IMDb).
 Allow users to provide feedback on recommendations to improve accuracy.
 
 📧 Contact
-If you have any questions or feedback, feel free to reach out!
 
+If you have any questions or feedback, feel free to reach out!
 Name: Abhishek Pandey
 Email: abhishekpandey88201@gmail.com
 GitHub: Abhishek18141
