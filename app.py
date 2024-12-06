@@ -48,7 +48,8 @@ if st.sidebar.button('Show Recommendation'):
 
 # Add a button to clear the selection (recreate the selectbox with a unique key)
 if st.sidebar.button('Clear Selection'):
-    st.experimental_rerun()
+    # Reset the selectbox by recreating it with a new key
+    st.sidebar.selectbox("Kindly type or select a movie from the dropdown", movie_list, key=selectbox_key + '_reset')
 
 # Footer
 st.markdown("""
