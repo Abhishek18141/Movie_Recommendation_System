@@ -159,13 +159,8 @@ st.sidebar.markdown("### 📊 Movie Database Stats")
 st.sidebar.info(f"🎬 Total Movies: {len(movies)}")
 st.sidebar.success("✨ AI-Powered Recommendations")
 
-    # Center the recommendation button within the main column
-    btn_col1, btn_col2, btn_col3 = st.columns([1, 1, 1])
-    with btn_col2:
-        get_recommendations = st.button('🔍 Get Recommendations', help="Click to get personalized movie recommendations")
-
-# Recommendation results
-if get_recommendations:
+# Recommendation button and results - moved to main area
+if st.button('🔍 Get Recommendations', help="Click to get personalized movie recommendations"):
     with st.spinner('🎬 Finding perfect movies for you...'):
         recommended_movie_names = recommend(selected_movie)
         
